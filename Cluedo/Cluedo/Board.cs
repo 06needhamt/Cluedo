@@ -8,14 +8,42 @@ namespace Cluedo
 {
     class Board
     {
-        private LinkedList<Square> board = new LinkedList<Square>();
+        public LinkedList<Square> boardSquares = new LinkedList<Square>();
 
         public Board()
         {
-            for (int i = 0; i <= 36; i++)
-            {
-                board.AddLast(new Square());
-            }
+            this.boardSquares.AddLast(new Square("Blank Square",false,false,false));
+            this.boardSquares.AddLast(new Square("Blank Square",false,false,false));
+            this.boardSquares.AddLast(new Square("Blank Square",false,false,false));
+            this.boardSquares.AddLast(new Square("Doorway To Laptop Lab",false,true,false));
+            this.boardSquares.AddLast(new Square("Laptop Lab", true, false, false));
+            this.boardSquares.AddLast(new Square("Blank Square", false, false, false));
+            this.boardSquares.AddLast(new Square("Blank Square", false, false, false));
+            this.boardSquares.AddLast(new Square("Blank Square", false, false, false));
+            this.boardSquares.AddLast(new Square("Doorway To Network Lab", false, true, false));
+            this.boardSquares.AddLast(new Square("Network Lab", true, false, false));
+            this.boardSquares.AddLast(new Square("Blank Square", false, false, false));
+            this.boardSquares.AddLast(new Square("Doorway To School Office", false, true, false));
+            this.boardSquares.AddLast(new Square("Network Lab", true, false, false));
+            this.boardSquares.AddLast(new Square("Blank Square", false, false, false));
+            this.boardSquares.AddLast(new Square("Doorway To CE011", false, true, false));
+            this.boardSquares.AddLast(new Square("CE011", true, false, false));
+            this.boardSquares.AddLast(new Square("Blank Square", false, false, false));
+            this.boardSquares.AddLast(new Square("Blank Square", false, false, false));
+            this.boardSquares.AddLast(new Square("Blank Square", false, false, false));
+            this.boardSquares.AddLast(new Square("Doorway To Foyer", false, true, false));
+            this.boardSquares.AddLast(new Square("Foyer", true, false, false));
+            this.boardSquares.AddLast(new Square("Blank Square", false, false, false));
+            this.boardSquares.AddLast(new Square("Blank Square", false, false, false));
+            this.boardSquares.AddLast(new Square("Blank Square", false, false, false));
+            this.boardSquares.AddLast(new Square("Doorway To Lecture Theatre", false, true, false));
+            this.boardSquares.AddLast(new Square("Lecture Theatre", true, false, false));
+            this.boardSquares.AddLast(new Square("Blank Square", false, false, false));
+            this.boardSquares.AddLast(new Square("Doorway To Research Lab", false, true, false));
+            this.boardSquares.AddLast(new Square("Research Lab", true, false, false));
+            this.boardSquares.AddLast(new Square("Blank Square", false, false, false));
+            this.boardSquares.AddLast(new Square("Blank Square", false, false, false));
+            //this.boardSquares.Last = this.boardSquares.First;
         }
     }
 }

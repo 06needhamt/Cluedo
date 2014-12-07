@@ -1,1 +1,7 @@
 C:\Users\Tom\Desktop\CodingStuff\Cluedo\Cluedo\bin\Debug\Cluedo.exe.config
+C:\Users\Tom\Documents\GitHub\Cluedo\Cluedo\Cluedo\bin\Debug\Cluedo.exe.config
+C:\Users\Tom\Documents\GitHub\Cluedo\Cluedo\Cluedo\obj\Debug\Cluedo.csprojResolveAssemblyReference.cache
+C:\Users\Tom\Documents\GitHub\Cluedo\Cluedo\Cluedo\bin\Debug\Cluedo.exe
+C:\Users\Tom\Documents\GitHub\Cluedo\Cluedo\Cluedo\bin\Debug\Cluedo.pdb
+C:\Users\Tom\Documents\GitHub\Cluedo\Cluedo\Cluedo\obj\Debug\Cluedo.exe
+C:\Users\Tom\Documents\GitHub\Cluedo\Cluedo\Cluedo\obj\Debug\Cluedo.pdb
