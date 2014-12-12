@@ -62,6 +62,7 @@ namespace Cluedo
                 do
                 {
                     this.currentSquare = this.currentSquare.Next;
+                    System.Threading.Thread.Sleep(25);
 
                 } while (this.currentSquare.Value.isoccupied);
             }
