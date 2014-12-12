@@ -11,6 +11,7 @@ namespace Cluedo
         string name;
         LinkedListNode<Square> currentSquare;
         Board board;
+        public EnumCards[] cards = new EnumCards[3];
 
         public Player(string name, ref Board board)
         {
@@ -26,7 +27,7 @@ namespace Cluedo
 
         public LinkedListNode<Square> Move(int amount)
         {
-            Console.WriteLine(amount);
+            Console.WriteLine("You Rolled " + amount);
             this.currentSquare.Value.isoccupied = false;
             while (amount != 0)
             {
@@ -35,11 +36,13 @@ namespace Cluedo
                     this.currentSquare = board.boardSquares.First;
                 }
                 this.currentSquare = currentSquare.Next;
+                Console.WriteLine(amount + this.currentSquare.Value.name);
+                amount--;
                 if(this.currentSquare.Value.isdoorway)
                 {
                     Console.WriteLine("Do You Want to enter " + this.currentSquare.Value.name + " Y/N ");
                     char input;
-                    input = Convert.ToChar(Console.ReadLine());
+                    input = Console.ReadKey().KeyChar;
                     if(input.Equals('Y') || input.Equals('y'))
                     {
                         this.currentSquare = currentSquare.Next;
@@ -49,6 +52,7 @@ namespace Cluedo
                     }
                     else if (input.Equals('N') || input.Equals('n'))
                     {
+                        this.currentSquare = currentSquare.Next;
                         continue;
                     }
                 }

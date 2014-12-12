@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Board.cs" />
     <Compile Include="Dice.cs" />
+    <Compile Include="EnumCards.cs" />
     <Compile Include="EnumDiceValues.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
