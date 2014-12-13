@@ -24,13 +24,13 @@ namespace Cluedo
             theBoard = new Board(); // initialise the board
             theDice = new Dice(); // initialise the dice
             // initialise the players
-            Players[0] = new Player("Mark", ref theBoard);
-            Players[1] = new Player("Collette", ref theBoard);
-            Players[2] = new Player("Chris", ref theBoard);
-            Players[3] = new Player("Dan", ref theBoard);
-            Players[4] = new Player("Darryl", ref theBoard);
-            Players[5] = new Player("Sally", ref theBoard);
-            Players[6] = new Player("Peter", ref theBoard);
+            Players[0] = new Player("Mark", theBoard.boardSquares.First);
+            Players[1] = new Player("Collette", theBoard.boardSquares.First);
+            Players[2] = new Player("Chris", theBoard.boardSquares.First);
+            Players[3] = new Player("Dan", theBoard.boardSquares.First);
+            Players[4] = new Player("Darryl", theBoard.boardSquares.First);
+            Players[5] = new Player("Sally", theBoard.boardSquares.First);
+            Players[6] = new Player("Peter", theBoard.boardSquares.First);
             DealCards(); // randomly deal the cards out to the players
             GameLoop(); // start the game loop
             

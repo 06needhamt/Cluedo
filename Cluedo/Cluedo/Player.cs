@@ -10,14 +10,14 @@ namespace Cluedo
     {
         string name;
         LinkedListNode<Square> currentSquare;
-        Board board;
+        readonly LinkedListNode<Square> head;
         public EnumCards[] cards = new EnumCards[3];
 
-        public Player(string name, ref Board board)
+        public Player(string name, LinkedListNode<Square> head)
         {
             this.name = name;
-            this.board = board;
-            this.currentSquare = board.boardSquares.First;
+            this.head = head;
+            this.currentSquare = this.head;
         }
 
         public EnumDiceValues RollDice(Dice theDice)
@@ -29,11 +29,11 @@ namespace Cluedo
         {
             Console.WriteLine("You Rolled " + amount);
             this.currentSquare.Value.isoccupied = false;
-            while (amount != 0)
+            while (amount > 0)
             {
                 if (this.currentSquare.Next == null)
                 {
-                    this.currentSquare = board.boardSquares.First;
+                    this.currentSquare = this.head;
                 }
                 this.currentSquare = currentSquare.Next;
                 Console.WriteLine(amount + this.currentSquare.Value.name);
@@ -61,8 +61,15 @@ namespace Cluedo
             {
                 do
                 {
-                    this.currentSquare = this.currentSquare.Next;
-                    System.Threading.Thread.Sleep(25);
+                    if (currentSquare.Next == null)
+                    {
+                        this.currentSquare = this.head;
+                    }
+                    else
+                    {
+                        this.currentSquare = this.currentSquare.Next;
+                        //System.Threading.Thread.Sleep(25);
+                    }
 
                 } while (this.currentSquare.Value.isoccupied);
             }

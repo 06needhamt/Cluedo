@@ -8,7 +8,7 @@ namespace Cluedo
 {
     class Dice
     {
-        EnumDiceValues currentvalue;
+        //EnumDiceValues currentvalue;
 
         public Dice()
         {
