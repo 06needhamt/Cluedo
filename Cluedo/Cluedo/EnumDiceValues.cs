@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Cluedo
 {
+    // enumeration type to hold the values that can be rolled on the dice
     enum EnumDiceValues
     {
         ONE = 1,

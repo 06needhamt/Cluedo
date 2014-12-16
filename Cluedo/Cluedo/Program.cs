@@ -9,9 +9,9 @@ namespace Cluedo
 {
     class Program
     {
-        static Board theBoard;
-        static Dice theDice;
-        public static List<Player> Players = new List<Player>(7);
+        static Board theBoard; // variable to hold the board
+        static Dice theDice; // variable to hold the dice
+        public static List<Player> Players = new List<Player>(7); // list to hold the players
 
         static void Main(string[] args)
         {
@@ -49,11 +49,12 @@ namespace Cluedo
                     Players[j].cards[1] = (EnumCards)temp[n + 1]; // assign the current players second card to the nth + 1 element of the temp array
                     Players[j].cards[2] = (EnumCards)temp[n + 2]; // assign the current players third card to the nth + 2 element of the temp array
                     n += 3;                                       // add 3 to n
+                    // print out the current players cards
                     Console.WriteLine("Player " + (j + 1)  + " Your cards are");
                     Console.WriteLine(Players[j].cards[0].ToString());
                     Console.WriteLine(Players[j].cards[1].ToString());
                     Console.WriteLine(Players[j].cards[2].ToString());
-                    Console.WriteLine("Press any key player " + (j + 1));
+                    Console.WriteLine("Press any key player " + (j + 2));
                     Console.ReadKey();
                     Console.Clear();
                 }

@@ -8,10 +8,12 @@ namespace Cluedo
 {
     class Board
     {
-        public LinkedList<Square> boardSquares = new LinkedList<Square>();
+        public LinkedList<Square> boardSquares = new LinkedList<Square>(); // Linked List to hold the squares on the board
 
+        // Constructor for the board
         public Board()
         {
+            // initialise all the squares on the board
             this.boardSquares.AddLast(new Square("Blank Square",false,false,false));
             this.boardSquares.AddLast(new Square("Blank Square",false,false,false));
             this.boardSquares.AddLast(new Square("Blank Square",false,false,false));
@@ -43,7 +45,6 @@ namespace Cluedo
             this.boardSquares.AddLast(new Square("Research Lab", true, false, false));
             this.boardSquares.AddLast(new Square("Blank Square", false, false, false));
             this.boardSquares.AddLast(new Square("Blank Square", false, false, false));
-            //this.boardSquares.Last = this.boardSquares.First;
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Cluedo
 {
+    // enumeration fo the deck of cards to be used in the game
     enum EnumCards
     {
         #region Rooms
