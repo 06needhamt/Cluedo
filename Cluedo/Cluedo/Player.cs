@@ -48,6 +48,11 @@ namespace Cluedo
                         this.currentSquare = currentSquare.Next;
                         Console.WriteLine(this.currentSquare.Value.name);
                         this.currentSquare.Value.isoccupied = true;
+                        Console.WriteLine("Enter the name of the player you wish to accuse");
+                        string name = Console.ReadLine();
+                        Console.WriteLine("Enter the weapon that you think was used");
+                        EnumCards weapon = (EnumCards) Enum.Parse(typeof(EnumCards), Console.ReadLine());
+                        Accuse(name,weapon,this.currentSquare);
                         return this.currentSquare;
                     }
                     else if (input.Equals('N') || input.Equals('n'))
@@ -76,6 +81,12 @@ namespace Cluedo
             Console.WriteLine(this.currentSquare.Value.name);
             this.currentSquare.Value.isoccupied = true;
             return this.currentSquare;
+        }
+
+        private void Accuse(string name, EnumCards Weapon, LinkedListNode<Square> currentsquare)
+        {
+            Program.Players.Find(x => x.name.Equals(name)).currentSquare = currentsquare; // move the suspected player into the room
+            Console.WriteLine("I think it was " + name + " in the " + currentsquare.Value.name + " Using the " + Weapon.ToString());
         }
     }
 }
