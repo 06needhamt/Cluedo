@@ -57,7 +57,10 @@ namespace Cluedo
                         this.currentSquare = currentSquare.Next; // move into the room
                         Console.WriteLine(this.currentSquare.Value.name); // write the name of the room to the console
                         //this.currentSquare.Value.isoccupied = true; // set it to occupied
-                        Accuse(); // make an accusation
+                        if( Accuse() ) // make an accusation
+                        {
+                            return this.currentSquare;
+                        }
                         return this.currentSquare; // return the current square
                     }
                     else if (input.Equals('N') || input.Equals('n')) // if they entered 'N' (No)
@@ -87,7 +90,7 @@ namespace Cluedo
             return this.currentSquare; // return the square that the player landed on
         }
 
-        private string Accuse()
+        private bool Accuse()
         {
             bool accused = false;
             while (!accused)
@@ -96,7 +99,7 @@ namespace Cluedo
                 string name = Console.ReadLine(); // save the user input
                 Console.WriteLine("Enter the weapon that you think was used"); // ask the player to Enter the weapon that you think was used
                 EnumCards weapon = (EnumCards)Enum.Parse(typeof(EnumCards), Console.ReadLine().ToUpper()); // save the inputted weapon
-                string accusation = "I think it was " + name + " in the " + this.currentSquare.Value.name + " Using the " + weapon.ToString().ToLower(); // save the accusation
+                string accusation = "I think it was " + name.ToLower() + " in the " + this.currentSquare.Value.name.ToLower() + " Using the " + weapon.ToString().ToLower(); // save the accusation
                 Program.Players.Find(x => x.name.Equals(name)).currentSquare = currentSquare; // move the suspected player into the room
                 // if the cuerrent accusation has already been made
                 if (accusations.Contains(accusation))
@@ -106,13 +109,21 @@ namespace Cluedo
                 }
                 else // otherwise they have made a valid accusation
                 {
+                    if (CheckAnswer(accusation))
+                    {
+                        Program.GameWon = true;
+                    }
                     accused = true; // a calid accusation has been made
                     accusations.Add(accusation); // add it to the list of accusations that have been made
                     Console.WriteLine(accusation);
-                    return accusation; // return the accusation
+                    return Program.GameWon; // return whether the game has been won
                 }
             }
-            return null; // otherwise return null
+            return false; // otherwise return false
+        }
+        private bool CheckAnswer(string Accusation)
+        {
+            return Program.answerstring.Equals(Accusation) ? true : false;
         }
     }
 }

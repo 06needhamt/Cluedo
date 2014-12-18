@@ -12,12 +12,15 @@ namespace Cluedo
         static Board theBoard; // variable to hold the board
         static Dice theDice; // variable to hold the dice
         public static List<Player> Players = new List<Player>(6); // list to hold the players
-        public static List<int> answer = new List<int>();
+        public static List<EnumCards> answer = new List<EnumCards>();
         static Random r = new Random(); // create random number generator
         static List<int> temp;
+        public static string answerstring;
+        public static bool GameWon = false;
 
         static void Main(string[] args)
         {
+            PlaySound();
             Console.WriteLine("Welcome To Cluedo");
             theBoard = new Board(); // initialise the board
             theDice = new Dice(); // initialise the dice
@@ -34,6 +37,16 @@ namespace Cluedo
             Console.ReadKey();
             GameLoop(); // start the game loop
             
+        }
+
+        private static void PlaySound()
+        {
+            SoundPlayer sp = new SoundPlayer();
+            string currentdir = System.Environment.CurrentDirectory + "/"; // current working directory
+            sp.SoundLocation = currentdir + "openTune.wav";
+            sp.PlayLooping();
+            sp.Dispose();
+
         }
         // procedure to deal each player 3 cards at random
         private static void DealCards()
@@ -75,13 +88,14 @@ namespace Cluedo
             int card2 = r.Next(7, 14);
             int card3 = r.Next(14, 21);
             // add the cards to the answer list and remove them from the list of cards to deal
-            answer.Add(card1);
+            answer.Add((EnumCards)card1);
             temp.Remove(card1);
-            answer.Add(card2);
+            answer.Add((EnumCards)card2);
             temp.Remove(card2);
-            answer.Add(card3);
+            answer.Add((EnumCards)card3);
             temp.Remove(card3);
-
+            answerstring = "I think it was " + answer.ElementAt(1).ToString().ToLower() + " in the " + answer.ElementAt(0).ToString().ToLower() + " Using the " + answer.ElementAt(2).ToString().ToLower(); // save the accusation
+            Console.WriteLine(answerstring);
         }
         // main game loop function
         private static int GameLoop()
@@ -95,6 +109,11 @@ namespace Cluedo
                     Console.Clear();
                     Console.WriteLine("Player " + (i + 1) + "'s " + "turn");
                     Players[i].Move((int)Players[i].RollDice(theDice));
+                    if(Program.GameWon)
+                    {
+                        Console.WriteLine("Player " + (i + 1) + " Has won the game ");
+                        return (i + 1);
+                    }
                     Console.WriteLine("Press any key to end your turn");
                     Console.ReadKey();
                 }
