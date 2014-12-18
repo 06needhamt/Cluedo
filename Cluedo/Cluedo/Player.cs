@@ -95,8 +95,8 @@ namespace Cluedo
                 Console.WriteLine("Enter the name of the player you wish to accuse"); // ask the player to Enter the name of the player you wish to accuse
                 string name = Console.ReadLine(); // save the user input
                 Console.WriteLine("Enter the weapon that you think was used"); // ask the player to Enter the weapon that you think was used
-                EnumCards weapon = (EnumCards)Enum.Parse(typeof(EnumCards), Console.ReadLine()); // save the inputted weapon
-                string accusation = "I think it was " + name + " in the " + this.currentSquare.Value.name + " Using the " + weapon.ToString(); // save the accusation
+                EnumCards weapon = (EnumCards)Enum.Parse(typeof(EnumCards), Console.ReadLine().ToUpper()); // save the inputted weapon
+                string accusation = "I think it was " + name + " in the " + this.currentSquare.Value.name + " Using the " + weapon.ToString().ToLower(); // save the accusation
                 Program.Players.Find(x => x.name.Equals(name)).currentSquare = currentSquare; // move the suspected player into the room
                 // if the cuerrent accusation has already been made
                 if (accusations.Contains(accusation))
