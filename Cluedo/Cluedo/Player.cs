@@ -109,6 +109,7 @@ namespace Cluedo
                 }
                 else // otherwise they have made a valid accusation
                 {
+                    accusation.Replace('_', ' ');
                     if (CheckAnswer(accusation))
                     {
                         accused = true; // a valid accusation has been made

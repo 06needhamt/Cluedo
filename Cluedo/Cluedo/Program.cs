@@ -29,7 +29,10 @@ namespace Cluedo
             DealCards(); // randomly deal the cards out to the players
             Console.WriteLine("Press any key to start the game");
             Console.ReadKey();
-            GameLoop(); // start the game loop
+            int winner = GameLoop(); // start the game loop
+            Console.WriteLine("Player " + winner + " Has won the game");
+            Console.WriteLine("Press any key to exit");
+            Console.ReadKey();
             
         }
         // Function to initialise the players

@@ -18,15 +18,15 @@ namespace Cluedo
             this.boardSquares.AddLast(new Square("Blank Square",false,false,false));
             this.boardSquares.AddLast(new Square("Blank Square",false,false,false));
             this.boardSquares.AddLast(new Square("Doorway To Laptop Lab",false,true,false));
-            this.boardSquares.AddLast(new Square("Laptop Lab", true, false, false));
+            this.boardSquares.AddLast(new Square("Laptop_Lab", true, false, false));
             this.boardSquares.AddLast(new Square("Blank Square", false, false, false));
             this.boardSquares.AddLast(new Square("Blank Square", false, false, false));
             this.boardSquares.AddLast(new Square("Blank Square", false, false, false));
             this.boardSquares.AddLast(new Square("Doorway To Network Lab", false, true, false));
-            this.boardSquares.AddLast(new Square("Network Lab", true, false, false));
+            this.boardSquares.AddLast(new Square("Network_Lab", true, false, false));
             this.boardSquares.AddLast(new Square("Blank Square", false, false, false));
             this.boardSquares.AddLast(new Square("Doorway To School Office", false, true, false));
-            this.boardSquares.AddLast(new Square("Network Lab", true, false, false));
+            this.boardSquares.AddLast(new Square("School_Office", true, false, false));
             this.boardSquares.AddLast(new Square("Blank Square", false, false, false));
             this.boardSquares.AddLast(new Square("Doorway To CE011", false, true, false));
             this.boardSquares.AddLast(new Square("CE011", true, false, false));
@@ -39,10 +39,10 @@ namespace Cluedo
             this.boardSquares.AddLast(new Square("Blank Square", false, false, false));
             this.boardSquares.AddLast(new Square("Blank Square", false, false, false));
             this.boardSquares.AddLast(new Square("Doorway To Lecture Theatre", false, true, false));
-            this.boardSquares.AddLast(new Square("Lecture Theatre", true, false, false));
+            this.boardSquares.AddLast(new Square("Lecture_Theatre", true, false, false));
             this.boardSquares.AddLast(new Square("Blank Square", false, false, false));
             this.boardSquares.AddLast(new Square("Doorway To Research Lab", false, true, false));
-            this.boardSquares.AddLast(new Square("Research Lab", true, false, false));
+            this.boardSquares.AddLast(new Square("Research_Lab", true, false, false));
             this.boardSquares.AddLast(new Square("Blank Square", false, false, false));
             this.boardSquares.AddLast(new Square("Blank Square", false, false, false));
         }
