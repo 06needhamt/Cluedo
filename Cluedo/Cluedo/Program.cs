@@ -25,27 +25,32 @@ namespace Cluedo
             theBoard = new Board(); // initialise the board
             theDice = new Dice(); // initialise the dice
             // initialise the players
-            Players.Add(new Player("Mark", theBoard.boardSquares.First));
-            Players.Add(new Player("Collette", theBoard.boardSquares.First));
-            Players.Add(new Player("Chris", theBoard.boardSquares.First));
-            Players.Add(new Player("Dan", theBoard.boardSquares.First));
-            Players.Add(new Player("Darryl", theBoard.boardSquares.First));
-            Players.Add(new Player("Sally", theBoard.boardSquares.First));
-            //Players.Add(new Player("Peter", theBoard.boardSquares.First));
+            CreatePlayers();
             DealCards(); // randomly deal the cards out to the players
             Console.WriteLine("Press any key to start the game");
             Console.ReadKey();
             GameLoop(); // start the game loop
             
         }
+        // Function to initialise the players
+        private static void CreatePlayers()
+        {
+            // add each of the active players to the list of players
+            Players.Add(new Player("Mark", theBoard.boardSquares.First));
+            Players.Add(new Player("Collette", theBoard.boardSquares.First));
+            Players.Add(new Player("Chris", theBoard.boardSquares.First));
+            Players.Add(new Player("Dan", theBoard.boardSquares.First));
+            Players.Add(new Player("Darryl", theBoard.boardSquares.First));
+            Players.Add(new Player("Sally", theBoard.boardSquares.First));
+        }
 
         private static void PlaySound()
         {
             SoundPlayer sp = new SoundPlayer();
             string currentdir = System.Environment.CurrentDirectory + "/"; // current working directory
-            sp.SoundLocation = currentdir + "openTune.wav";
-            sp.PlayLooping();
-            sp.Dispose();
+            sp.SoundLocation = currentdir + "openTune.wav"; // load the sound file to be played into the sound player
+            sp.Play(); // play the sound
+            sp.Dispose(); // dispose the sound player
 
         }
         // procedure to deal each player 3 cards at random
@@ -53,22 +58,18 @@ namespace Cluedo
         {
             //Random r = new Random(); // create random number generator
             temp = Enumerable.Range(0,21).OrderBy(x => r.Next()).ToList<int>(); // fill the list with values from 0 to 20 and arrange them randomly
-            //for (int k = 0; k < temp.Length; k++)
-            //{
-            //    Console.WriteLine(temp[k]); // write the number out to the console
-            //}
-            int n = 0; // index variable for temp array
+            int index = 0; // index variable for temp array
             // loop to deal each player 3 cards at random
             GenerateAnswer(); // function to generate the answer required to win the game
 
                 for (int j = 0; j < Players.Count; j++)
                 {
-                    Players[j].cards[0] = (EnumCards)temp[n]; // assign the current players first card to the nth element of the temp array
-                    temp.RemoveAt(n);
-                    Players[j].cards[1] = (EnumCards)temp[n]; // assign the current players second card to the nth element of the temp array
-                    temp.RemoveAt(n);
-                    Players[j].cards[2] = (EnumCards)temp[n]; // assign the current players third card to the nth element of the temp array
-                    temp.RemoveAt(n);
+                    Players[j].cards[0] = (EnumCards)temp[index]; // assign the current players first card to the nth element of the temp array
+                    temp.RemoveAt(index);
+                    Players[j].cards[1] = (EnumCards)temp[index]; // assign the current players second card to the nth element of the temp array
+                    temp.RemoveAt(index);
+                    Players[j].cards[2] = (EnumCards)temp[index]; // assign the current players third card to the nth element of the temp array
+                    temp.RemoveAt(index);
                     // print out the current players cards
                     Console.WriteLine("Player " + (j + 1) + " Your cards are");
                     Console.WriteLine(Players[j].cards[0].ToString());
@@ -108,13 +109,13 @@ namespace Cluedo
                 {
                     Console.Clear();
                     Console.WriteLine("Player " + (i + 1) + "'s " + "turn");
-                    Players[i].Move((int)Players[i].RollDice(theDice));
-                    if(Program.GameWon)
+                    Players[i].Move((int)Players[i].RollDice(theDice)); // make the current player roll the dice
+                    if(Program.GameWon) // if the game is won
                     {
-                        Console.WriteLine("Player " + (i + 1) + " Has won the game ");
-                        return (i + 1);
+                        Console.WriteLine("Player " + (i + 1) + " Has won the game "); // write the winner to the console
+                        return (i + 1); // return the winning player number
                     }
-                    Console.WriteLine("Press any key to end your turn");
+                    Console.WriteLine("Press any key to end your turn"); // tell the player to press any key to end their turn
                     Console.ReadKey();
                 }
             }

@@ -111,19 +111,30 @@ namespace Cluedo
                 {
                     if (CheckAnswer(accusation))
                     {
-                        Program.GameWon = true;
+                        accused = true; // a valid accusation has been made
+                        Program.GameWon = true; // the accusation that was made is correct so the game is won
+                        Console.ForegroundColor = ConsoleColor.Green; // as it is the correct answer set the console color to green
+                        Console.WriteLine(accusation); // write the accusation to the console
+                        Console.ResetColor(); // reset the console color back to normal
                     }
-                    accused = true; // a calid accusation has been made
-                    accusations.Add(accusation); // add it to the list of accusations that have been made
-                    Console.WriteLine(accusation);
+                    else
+                    {
+                        accused = true; // a valid accusation has been made
+                        accusations.Add(accusation); // add it to the list of accusations that have been made
+                        Console.ForegroundColor = ConsoleColor.Red; // as it is the incorrect answer set the console colour to red
+                        Console.WriteLine(accusation); // write the accusation to the console
+                        Console.ResetColor(); // reset the console color back to normal
+                    }
+                    
                     return Program.GameWon; // return whether the game has been won
                 }
             }
             return false; // otherwise return false
         }
+        // function to check whether the accusation made was correct
         private bool CheckAnswer(string Accusation)
         {
-            return Program.answerstring.Equals(Accusation) ? true : false;
+            return Program.answerstring.Equals(Accusation) ? true : false; // returns true if the accusation was correct
         }
     }
 }
