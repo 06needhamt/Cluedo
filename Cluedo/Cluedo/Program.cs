@@ -39,12 +39,13 @@ namespace Cluedo
         private static void CreatePlayers()
         {
             // add each of the active players to the list of players
-            Players.Add(new Player("Mark", theBoard.boardSquares.First));
-            Players.Add(new Player("Collette", theBoard.boardSquares.First));
-            Players.Add(new Player("Chris", theBoard.boardSquares.First));
-            Players.Add(new Player("Dan", theBoard.boardSquares.First));
-            Players.Add(new Player("Darryl", theBoard.boardSquares.First));
-            Players.Add(new Player("Sally", theBoard.boardSquares.First));
+            Players.Add(new Player("mark", theBoard.boardSquares.First));
+            Players.Add(new Player("collette", theBoard.boardSquares.First));
+            Players.Add(new Player("chris", theBoard.boardSquares.First));
+            Players.Add(new Player("dan", theBoard.boardSquares.First));
+            Players.Add(new Player("darryl", theBoard.boardSquares.First));
+            Players.Add(new Player("sally", theBoard.boardSquares.First));
+            Players.Add(new Player("peter", theBoard.boardSquares.First));
         }
 
         private static void PlaySound()
@@ -65,7 +66,7 @@ namespace Cluedo
             // loop to deal each player 3 cards at random
             GenerateAnswer(); // function to generate the answer required to win the game
 
-                for (int j = 0; j < Players.Count; j++)
+                for (int j = 0; j < Players.Count - 1 ; j++)
                 {
                     Players[j].cards[0] = (EnumCards)temp[index]; // assign the current players first card to the nth element of the temp array
                     temp.RemoveAt(index);
@@ -108,7 +109,7 @@ namespace Cluedo
             while(true)
             {
                 // loop that controls players turn
-                for (int i = 0; i < Players.Count; i++ )
+                for (int i = 0; i < Players.Count - 1 ; i++ )
                 {
                     Console.Clear();
                     Console.WriteLine("Player " + (i + 1) + "'s " + "turn");
