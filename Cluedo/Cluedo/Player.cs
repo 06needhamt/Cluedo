@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Media;
 
 namespace Cluedo
 {
     // this class represents a player within the game
     class Player
     {
-        string name; // variable to hold the players name
+        public string name; // variable to hold the players name
         LinkedListNode<Square> currentSquare; // variable to hold the square that the player is currently on 
         readonly LinkedListNode<Square> Start; // variable to hold the first square on the board
         public EnumCards[] cards = new EnumCards[3]; // array to hold the player's cards
@@ -89,18 +90,29 @@ namespace Cluedo
             this.currentSquare.Value.isoccupied = true; // mark the square as occupied
             return this.currentSquare; // return the square that the player landed on
         }
-
+        // this function allows players to make an accusation
         private bool Accuse()
         {
             bool accused = false;
             while (!accused)
             {
-                Console.WriteLine("Enter the name of the player you wish to accuse"); // ask the player to Enter the name of the player you wish to accuse
-                string name = Console.ReadLine(); // save the user input
-                Console.WriteLine("Enter the weapon that you think was used"); // ask the player to Enter the weapon that you think was used
-                EnumCards weapon = (EnumCards)Enum.Parse(typeof(EnumCards), Console.ReadLine().ToUpper()); // save the inputted weapon
-                string accusation = "I think it was " + name.ToLower() + " in the " + this.currentSquare.Value.name.ToLower() + " Using the " + weapon.ToString().ToLower(); // save the accusation
-                Program.Players.Find(x => x.name.Equals(name)).currentSquare = currentSquare; // move the suspected player into the room
+                string accusation = string.Empty;
+                // error handler incase the player misspells something
+                try
+                {
+                    Console.WriteLine("Enter the name of the player you wish to accuse"); // ask the player to Enter the name of the player you wish to accuse
+                    string name = Console.ReadLine(); // save the user input
+                    Console.WriteLine("Enter the weapon that you think was used \n" + "Please use underscores instead of spaces"); // ask the player to Enter the weapon that you think was used
+                    EnumCards weapon = (EnumCards)Enum.Parse(typeof(EnumCards), Console.ReadLine().ToUpper()); // save the inputted weapon
+                    accusation = "I think it was " + name.ToLower() + " in the " + this.currentSquare.Value.name.ToLower() + " Using the " + weapon.ToString().ToLower(); // save the accusation
+                    Program.Players.Find(x => x.name.Equals(name.ToLower())).currentSquare = currentSquare; // move the suspected player into the room
+                }
+                    // catch the exception
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Whoops you might have spelled something wrong"); // tell the player that they may have mispelled something
+                    continue; // continue the game
+                }
                 // if the cuerrent accusation has already been made
                 if (accusations.Contains(accusation))
                 {
@@ -112,6 +124,7 @@ namespace Cluedo
                     accusation.Replace('_', ' ');
                     if (CheckAnswer(accusation))
                     {
+                        PlayCorrectSound();
                         accused = true; // a valid accusation has been made
                         Program.GameWon = true; // the accusation that was made is correct so the game is won
                         Console.ForegroundColor = ConsoleColor.Green; // as it is the correct answer set the console color to green
@@ -120,6 +133,7 @@ namespace Cluedo
                     }
                     else
                     {
+                        PlayIncorrectSound();
                         accused = true; // a valid accusation has been made
                         accusations.Add(accusation); // add it to the list of accusations that have been made
                         Console.ForegroundColor = ConsoleColor.Red; // as it is the incorrect answer set the console colour to red
@@ -131,6 +145,24 @@ namespace Cluedo
                 }
             }
             return false; // otherwise return false
+        }
+        // this function plays a sound when the player has made a correct accusation
+        private void PlayCorrectSound()
+        {
+            SoundPlayer sp = new SoundPlayer();
+            string currentdir = System.Environment.CurrentDirectory + "/"; // current working directory
+            sp.SoundLocation = currentdir + "right.wav"; // load the sound file to be played into the sound player
+            sp.Play(); // play the sound
+            sp.Dispose(); // dispose the sound player
+        }
+        // this function plays a sound when the player has made an incorrect accusation
+        private void PlayIncorrectSound()
+        {
+            SoundPlayer sp = new SoundPlayer();
+            string currentdir = System.Environment.CurrentDirectory + "/"; // current working directory
+            sp.SoundLocation = currentdir + "wrong.wav"; // load the sound file to be played into the sound player
+            sp.Play(); // play the sound
+            sp.Dispose(); // dispose the sound player
         }
         // function to check whether the accusation made was correct
         private bool CheckAnswer(string Accusation)

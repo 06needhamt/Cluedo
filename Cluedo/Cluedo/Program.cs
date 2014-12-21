@@ -26,6 +26,7 @@ namespace Cluedo
             theDice = new Dice(); // initialise the dice
             // initialise the players
             CreatePlayers();
+            PrintData(); // print the list of cards to the console so the player can write them down
             DealCards(); // randomly deal the cards out to the players
             Console.WriteLine("Press any key to start the game");
             Console.ReadKey();
@@ -34,6 +35,44 @@ namespace Cluedo
             Console.WriteLine("Press any key to exit");
             Console.ReadKey();
             
+        }
+        // Function to print the list of cards to the console so the player can write them down
+        private static void PrintData()
+        {
+            Console.WriteLine("Please write these down before we begin");
+            // print the players
+            Console.WriteLine("These are the players");
+            for(int i = 0; i < Players.Count; i++)
+            {
+                Console.WriteLine(Players.ElementAt(i).name);
+            }
+            Console.WriteLine("Press any key to see the weapons");
+            Console.ReadKey();
+            Console.Clear();
+            // print the weapons
+            Console.WriteLine("These are the weapons");
+            Console.WriteLine(EnumCards.PEN_DRIVE.ToString().ToLower());
+            Console.WriteLine(EnumCards.KEYBOARD.ToString().ToLower());
+            Console.WriteLine(EnumCards.POWER_CABLE.ToString().ToLower());
+            Console.WriteLine(EnumCards.POWER_POINT_SLIDES.ToString().ToLower());
+            Console.WriteLine(EnumCards.SCISSORS.ToString().ToLower());
+            Console.WriteLine(EnumCards.SOLDERING_IRON.ToString().ToLower());
+            Console.WriteLine(EnumCards.STAPLER.ToString().ToLower());
+            Console.WriteLine("Press any key to see the rooms");
+            Console.ReadKey();
+            Console.Clear();
+            // print the rooms
+            Console.WriteLine("These are the rooms");
+            Console.WriteLine(EnumCards.CE011.ToString().ToLower());
+            Console.WriteLine(EnumCards.FOYER.ToString().ToLower());
+            Console.WriteLine(EnumCards.LAPTOP_LAB.ToString().ToLower());
+            Console.WriteLine(EnumCards.LECTURE_THEATRE.ToString().ToLower());
+            Console.WriteLine(EnumCards.NETWORK_LAB.ToString().ToLower());
+            Console.WriteLine(EnumCards.RESEARCH_LAB.ToString().ToLower());
+            Console.WriteLine(EnumCards.SCHOOL_OFFICE.ToString().ToLower());
+            Console.WriteLine("Press any key to continue");
+            Console.ReadKey();
+            Console.Clear();
         }
         // Function to initialise the players
         private static void CreatePlayers()
@@ -47,7 +86,7 @@ namespace Cluedo
             Players.Add(new Player("sally", theBoard.boardSquares.First));
             Players.Add(new Player("peter", theBoard.boardSquares.First));
         }
-
+        // this function plays a sond when the game is first open
         private static void PlaySound()
         {
             SoundPlayer sp = new SoundPlayer();
@@ -60,7 +99,6 @@ namespace Cluedo
         // procedure to deal each player 3 cards at random
         private static void DealCards()
         {
-            //Random r = new Random(); // create random number generator
             temp = Enumerable.Range(0,21).OrderBy(x => r.Next()).ToList<int>(); // fill the list with values from 0 to 20 and arrange them randomly
             int index = 0; // index variable for temp array
             // loop to deal each player 3 cards at random
@@ -75,10 +113,11 @@ namespace Cluedo
                     Players[j].cards[2] = (EnumCards)temp[index]; // assign the current players third card to the nth element of the temp array
                     temp.RemoveAt(index);
                     // print out the current players cards
-                    Console.WriteLine("Player " + (j + 1) + " Your cards are");
+                    Console.WriteLine("Player " + (j + 1) + " Your playing cards are");
                     Console.WriteLine(Players[j].cards[0].ToString());
                     Console.WriteLine(Players[j].cards[1].ToString());
                     Console.WriteLine(Players[j].cards[2].ToString());
+                    Console.WriteLine("Please check these off your list");
                     Console.WriteLine("Press any key player " + (j + 2));
                     Console.ReadKey();
                     Console.Clear();
